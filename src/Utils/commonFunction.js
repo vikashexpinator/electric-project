@@ -29,6 +29,7 @@ export function getPointerPosition(position) {
     return pointerPosition;
   }
 }
+
 // create required format of data used in as parameter
 export function dataFormatForApi(date) {
   return date.toJSON().slice(0, 10).replaceAll("-", "");

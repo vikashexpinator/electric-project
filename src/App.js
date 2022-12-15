@@ -1,13 +1,15 @@
 import "./App.css";
 import { xmlToJson } from "./Utils/xmlToJs";
 import { useEffect, useState } from "react";
+import axios from 'axios';
+
 import {
   euroPerMwhToEuroCentsPerKwh,
   GetCurrentTime,
   ChangeDateFormat,
   getPointerPosition,
 } from "./Utils/commonFunction";
-import {apiRequrestForElectricPrice} from './Utils/apiRequest'
+// import {apiRequrestForElectricPrice} from './Utils/apiRequest'
 
 function App() {
   // Define State Variable
@@ -56,8 +58,17 @@ function App() {
   //   return perHourPriceToPay;
   // }
 
-  apiRequrestForElectricPrice();
+  // apiRequrestForElectricPrice();
 
+  useEffect(() => {
+    const loadPost = async () => {
+        const response = await axios.get(
+        "https://web-api.tp.entsoe.eu/api?securityToken=dc731ef0-4582-408b-9cad-c9dbebbe306f&documentType=A44&in_Domain=10YFI-1--------U&out_Domain=10YFI-1--------U&periodStart=202212142300&periodEnd=202212152300");
+        response ? console.warn(response.data) : console.warn("no we don't have data")
+    }
+    // Call the function
+    loadPost();
+}, []);
 
   return (
     <div className="App">
@@ -104,4 +115,4 @@ function App() {
 }
 
 export default App;
-// [0]["price.amount"]
+

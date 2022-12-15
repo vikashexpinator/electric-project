@@ -1,4 +1,3 @@
-import logo from "./logo.svg";
 import "./App.css";
 import { xmlToJson } from "./Utils/xmlToJs";
 import { useEffect, useState } from "react";
@@ -7,7 +6,6 @@ import {
   GetCurrentTime,
   ChangeDateFormat,
   getPointerPosition,
-  dataFormatForApi
 } from "./Utils/commonFunction";
 import {apiRequrestForElectricPrice} from './Utils/apiRequest'
 
@@ -24,7 +22,7 @@ function App() {
   let getPriceArray =
     first && first.Publication_MarketDocument.TimeSeries[0].Period[0].Point;
   let newArray =
-    getPriceArray != undefined &&
+    getPriceArray !== undefined &&
     getPriceArray.map((el) => {
       return [el.position, el["price.amount"]];
     });
@@ -45,7 +43,7 @@ function App() {
 
   // To get the present electricity price.
   function presentElectricityPrice() {
-    if (getPriceArray != undefined) {
+    if (getPriceArray !== undefined) {
       const spotElecticPrice =
         getPriceArray[presentTime - 1]["price.amount"].toString();
       return spotElecticPrice;
@@ -53,10 +51,10 @@ function App() {
   }
 
   // Appliance Electric Cost
-  function ApplianceElectricCost(ElecConsumption, vat, spotPrice) {
-    const perHourPriceToPay = (spotPrice + spotPrice * vat) * ElecConsumption;
-    return perHourPriceToPay;
-  }
+  // function ApplianceElectricCost(ElecConsumption, vat, spotPrice) {
+  //   const perHourPriceToPay = (spotPrice + spotPrice * vat) * ElecConsumption;
+  //   return perHourPriceToPay;
+  // }
 
   apiRequrestForElectricPrice();
 

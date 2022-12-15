@@ -1,4 +1,3 @@
-import React from "react";
 import xml2js from "xml2js";
 
 export function xmlToJson(setfirst) {

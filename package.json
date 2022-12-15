@@ -11,6 +11,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
+    "stream": "^0.0.2",
     "timers": "^0.1.1",
     "web-vitals": "^2.1.4",
     "xml2js": "^0.4.23"
@@ -27,7 +28,7 @@
       "react-app/jest"
     ]
   },
-  "proxy":"https://web-api.tp.entsoe.eu",
+  "proxy": "https://web-api.tp.entsoe.eu",
   "browser": {
     "buffer": true
   },

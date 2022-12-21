@@ -40,7 +40,7 @@ var config = {
   method: 'get',
   url: url,
   headers: {
-    'Access-Control-Allow-Origin': '*'
+    'Access-Control-Allow-Origin': 'https://gentle-druid-cdade6.netlify.app'
   }
 };
 

@@ -40,6 +40,7 @@ var config = {
   method: 'get',
   url: url,
   headers: {
+    'Access-Control-Allow-Origin': '*'
   }
 };
 
@@ -55,7 +56,7 @@ var config = {
     // const response = await axios.get(url);
     try {
       const response = await axios(config);
-      // console.log(response.data)
+  
       if (response){
         const data = await xmlToJson(response.data)
         setfirst(data);

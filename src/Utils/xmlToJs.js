@@ -40,7 +40,6 @@ var config = {
   method: 'get',
   url: "https://cd73-101-0-41-68.in.ngrok.io",
   headers: {
-    'Access-Control-Allow-Origin': *,
   }
 };
 
@@ -59,7 +58,6 @@ var config = {
   
       if (response){
         const data = await xmlToJson(response.data.data)
-        console.log(data);
         setfirst(data);
   
         // .then((json) => {

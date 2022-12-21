@@ -59,6 +59,7 @@ var config = {
   
       if (response){
         const data = await xmlToJson(response.data.data)
+        console.log(data);
         setfirst(data);
   
         // .then((json) => {

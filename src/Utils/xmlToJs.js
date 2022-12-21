@@ -40,7 +40,6 @@ var config = {
   method: 'get',
   url: url,
   headers: {
-    'Access-Control-Allow-Origin': '*',
   }
 };
 

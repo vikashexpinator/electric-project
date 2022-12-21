@@ -1,0 +1,3 @@
+Token: dc731ef0-4582-408b-9cad-c9dbebbe306f
+Doc: https://docs.google.com/document/d/17nsIR9NMdNnsp8IdWgXEW8m61e1nd2dQljcyEbybSz4/edit?usp=sharing
+reqUrl: https://web-api.tp.entsoe.eu/api 

@@ -1,0 +1,25 @@
+{
+  "description": {
+    "part1": "new one we have <1>src/App.js</1> .",
+    "part2": "Learn newone react",
+    "continue": "Jatka",
+    "Monday": "Maanantai",
+    "Tuesday": "Tuesday",
+    "Wednesday": "Keskiviikko",
+    "Thursday": "Torstai",
+    "Friday": "Perjantai",
+    "Saturday": "Lauantai",
+    "Sunday": "Sunnuntai",
+    "Sauna": "Sauna",
+    "Owen": "Sähköuuni",
+    "ElectricCar": "Sähköauton lataus",
+    "Dishwasher": "Asitianpesukone",
+    "Washingmachine": "Pyykinpesukone",
+    "LaundryDryer": "Pyykinkuivain",
+    "GamingPC": "Pelitietokone",
+    "Coffeemaker": "Kahvinkeitin",
+    "SpotNow": "HINTA NYT",
+    "FinlandSpotPriceNow": "SPOT-HINTA NYT",
+    "BottomMsg": "Sähköapurin on kehittänyt OOMF Agency Helsingissä. Hinnat ovat sähköpörssin SPOT-hintoja eikä niihin sisälly oman sopimuksesi marginaali. Kulutukset ovat arvioita. Palaute ja yhteydenotot: hello@sahkoapuri.fi "
+  }
+}

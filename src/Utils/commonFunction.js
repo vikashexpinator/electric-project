@@ -29,6 +29,16 @@ export function getPointerPosition(position) {
     return pointerPosition;
   }
 }
+// maxTop = 15.9 rem and mintop 35.9rem 
+export function getPointerPositionHeight(presnetValue, MaxValue) {
+  let totalRem;
+  if (presnetValue && MaxValue) {
+    let heightPer = (((presnetValue/MaxValue)*100)/100);
+    let fixedValue = 5.52;
+    totalRem = (35.6 + fixedValue - (heightPer * (35.6 -14.5)));
+  };
+  return totalRem;
+}
 
 // create required format of data used in as parameter
 export function dataFormatForApi(date) {
@@ -51,6 +61,21 @@ export function differentAPIDate() {
   return dataData;
 }
 
+// Get WeekDayName According to date
+export function getWeekdayName(date) {
+  const weekdays = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+  return weekdays[date.getDay()];
+}
+
+// Appliance Electric Cost
+export function applianceElectricCost(consumption, vat, spotPrice) {
+  console.log(consumption, vat, spotPrice)
+  const perHourPriceToPay = (spotPrice * (1 + vat/100)) * consumption;
+  return `${parseFloat(perHourPriceToPay).toFixed(2)}€`;
+}
+
+
+
 // https://community.home-assistant.io/t/electricity-day-ahead-prices-for-home-assistant-using-node-red-and-entso-e-api/394484
 // https://transparency.entsoe.eu/content/static_content/Static%20content/web%20api/Guide.html
 // https://transparency.entsoe.eu/transmission-domain/r2/dayAheadPrices/show?name=&defaultValue=false&viewType=TABLE&areaType=BZN&atch=false&dateTime.dateTime=12.12.2022+00:00|CET|DAY&biddingZone.values=CTY|10YSE-1--------K!BZN|10Y1001A1001A44P&resolution.values=PT60M&dateTime.timezone=CET_CEST&dateTime.timezone_input=CET+(UTC+1)+/+CEST+(UTC+2)
@@ -60,3 +85,18 @@ export function differentAPIDate() {
 // const DateArrrayPath = Publication_MarketDocument.TimeSeries[0].Period[0].Point[0]["price.amount"]
 // const todaydate = Publication_MarketDocument["period.timeInterval"][0].end[0]
 // const currency = Publication_MarketDocument.TimeSeries[0]["currency_Unit.name"][0]
+
+
+// const applianceData = {
+//   currentVAT: 10, // in percent
+//   consumption: {
+//     sauna: "2.7", // in kwh
+//     owen: "0.5",
+//     electricCar: "4",
+//     diswasher: "0.34",
+//     washingMachine: "0.34",
+//     laundryDryer: "1",
+//     gamingPc: "0.5",
+//     coffeeMaker: "0.03",
+//   }
+// }

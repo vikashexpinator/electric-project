@@ -1,0 +1,25 @@
+{
+  "description": {
+    "part1": "Edit src/App.js and save to reload.",
+    "part2": "Learn React",
+    "continue": "Continue",
+    "Monday": "Monday",
+    "Tuesday": "Tuesday",
+    "Wednesday": "Wednesday",
+    "Thursday": "Thursday",
+    "Friday": "Friday",
+    "Saturday": "Saturday",
+    "Sunday": "Sunday",
+    "Sauna": "Sauna",
+    "Owen": "Owen",
+    "ElectricCar": "ElectricCar",
+    "Dishwasher": "Dishwasher",
+    "Washingmachine": "Washingmachine",
+    "LaundryDryer": "LaundryDryer",
+    "GamingPC": "GamingPC",
+    "Coffeemaker": "Coffeemaker",
+    "SpotNow": "SPOT NOW",
+    "FinlandSpotPriceNow": "Finland Spot Price Now",
+    "BottomMsg": "Sähköapuri developed by OOMF Agency - Helsinki Finland. Prices are estimations and does not include your own contract margin."
+  }
+}

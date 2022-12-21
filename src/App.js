@@ -1,118 +1,78 @@
+import React, { useState } from "react";
 import "./App.css";
-import { xmlToJson } from "./Utils/xmlToJs";
-import { useEffect, useState } from "react";
-import axios from 'axios';
+import Graph from "./Components/Graph";
+import Welcome from "./Components/Welcome";
+// import { xmlToJson } from "./Utils/xmlToJs";
 
-import {
-  euroPerMwhToEuroCentsPerKwh,
-  GetCurrentTime,
-  ChangeDateFormat,
-  getPointerPosition,
-} from "./Utils/commonFunction";
 // import {apiRequrestForElectricPrice} from './Utils/apiRequest'
 
+import { useTranslation } from "react-i18next";
+
+// const langs = {
+//   en: { nativeName: "English" },
+//   de: { nativeName: "Deutsch" },
+//   su: { nativeName: "Suomeksi" },
+// };
+
+
 function App() {
-  // Define State Variable
-  const [first, setfirst] = useState();
+  const [isWelcomePage, setIsWelcomePage] = useState(true);
+  const { t } = useTranslation();
 
-  // converted data and set into "first" state
-  useEffect(() => {
-    xmlToJson(setfirst);
-  }, []);
+// setTimeout(() => {
+//   const bottomPosition = document.getElementsByClassName("recharts-wrapper")[0].getBoundingClientRect().bottom;
+//   const topPosition = document.getElementsByClassName("recharts-wrapper")[0].getBoundingClientRect().top;
+//   const leftPosition = document.getElementsByClassName("recharts-wrapper")[0].getBoundingClientRect().left;
+//   const rightPosition = document.getElementsByClassName("recharts-wrapper")[0].getBoundingClientRect().right;
+  
+//   console.warn("thifsdfsdfsfsfsd", bottomPosition, topPosition, leftPosition, rightPosition)      
+// }, 2000);
 
-  // get price array
-  let getPriceArray =
-    first && first.Publication_MarketDocument.TimeSeries[0].Period[0].Point;
-  let newArray =
-    getPriceArray !== undefined &&
-    getPriceArray.map((el) => {
-      return [el.position, el["price.amount"]];
-    });
-  const newArr =
-    newArray.length > 0
-      ? newArray.map((el) => <p>{euroPerMwhToEuroCentsPerKwh(el[1])}</p>)
-      : null;
-
-  // get today date from first
-  let todayData =
-    first &&
-    first.Publication_MarketDocument["period.timeInterval"][0].end[0]?.split(
-      "T"
-    )[0];
-
-  // get hh of of hh:mm
-  const presentTime = GetCurrentTime().split(":")[0];
-
-  // To get the present electricity price.
-  function presentElectricityPrice() {
-    if (getPriceArray !== undefined) {
-      const spotElecticPrice =
-        getPriceArray[presentTime - 1]["price.amount"].toString();
-      return spotElecticPrice;
-    }
-  }
-
-  // Appliance Electric Cost
-  // function ApplianceElectricCost(ElecConsumption, vat, spotPrice) {
-  //   const perHourPriceToPay = (spotPrice + spotPrice * vat) * ElecConsumption;
-  //   return perHourPriceToPay;
-  // }
-
-  // apiRequrestForElectricPrice();
-
-  useEffect(() => {
-    const loadPost = async () => {
-        const response = await axios.get(
-        "https://web-api.tp.entsoe.eu/api?securityToken=dc731ef0-4582-408b-9cad-c9dbebbe306f&documentType=A44&in_Domain=10YFI-1--------U&out_Domain=10YFI-1--------U&periodStart=202212142300&periodEnd=202212152300");
-        response ? console.warn(response.data) : console.warn("no we don't have data")
-    }
-    // Call the function
-    loadPost();
-}, []);
 
   return (
     <div className="App">
-      <h2>Our Conveter</h2>
-      <div
-        className="PriceWindow"
-        // style={{ width: "563px", height: "259px", left: "1329px", top: "25px" }}
-      >
-        <div>{GetCurrentTime()}</div>
-        <div>{`Monday ${
-          typeof todayData == "string" ? ChangeDateFormat(todayData) : "none"
-        }`}</div>
-        <div>
-          FINLAND SPOT PRICE NOW <br />
-          {` ${euroPerMwhToEuroCentsPerKwh(presentElectricityPrice())} c/KWh`}
-        </div>
-        <div
-          id="ElectricityChart"
-          style={{
-            width: "95%",
-            display: "flex",
-            justifyContent: "space-between",
-          }}
-        >
-          {newArr}
-        </div>
-        <p>
-          Sahkoapuri developed by OOMF Agency – Helsinki Finland. Prices are
-          indicative and does not include your contract margin.
-        </p>
-        <div className="PointerMain">
-          <div
-            className="Pointer"
-            style={{ left: getPointerPosition(presentTime) }}
+      {isWelcomePage && <Welcome setIsWelcomePage={setIsWelcomePage} t={t} />}
+      {!isWelcomePage && <Graph t={t}/>}
+      {/* <div>
+        {Object.keys(langs).map((lng) => (
+          <button
+            key={lng}
+            style={{
+              fontWeight: i18n.resolvedLanguage === lng ? "bold" : "normal",
+            }}
+            type="submit"
+            onClick={() => i18n.changeLanguage(lng)}
           >
-            <div className="spotPrice" style={{ opacity: "0.7" }}>
-              Spot Price
-            </div>
-          </div>
-        </div>
+            {langs[lng].nativeName}
+          </button>
+        ))}
       </div>
+      <h3>{t("description.part1")}</h3>
+      <h4>{t("description.part2")}</h4>
+          <h4>{t("description.continue")}</h4> */}
     </div>
   );
 }
 
 export default App;
 
+
+
+// getPriceArray.map(el => el["price.amount"]).flat()
+
+// function euroPerMwhToEuroCentsPerKwh(euroPerMwh) {
+//   const euroPerKwh = (euroPerMwh / 1000) * 100;
+//   return parseFloat(euroPerKwh).toFixed(2);
+// }
+
+// let stringdata = data.map(el=> {
+//     if (euroPerMwhToEuroCentsPerKwh(el) < 10 ){
+//         return "#00FF0A,#FFFFFF"
+//     }else if (10 < euroPerMwhToEuroCentsPerKwh(el) < 20){
+//         return "#FAFF00"
+//     }else if (euroPerMwhToEuroCentsPerKwh(el) > 30){
+//         return "#FF3737"
+//     }
+// })
+
+// console.log(stringdata.toString());

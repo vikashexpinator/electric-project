@@ -1,72 +1,122 @@
-.App {
-  text-align: center;
+
+@font-face {
+  font-family: 'Fredoka dingbats';
+  src: url('./assets/fonts/Fredokadingbats.eot');
+  src: url('./assets/fonts/Fredokadingbats.eot?#iefix') format('embedded-opentype'),
+      url('./assets/fonts/Fredokadingbats.woff2') format('woff2'),
+      url('./assets/fonts/Fredokadingbats.woff') format('woff'),
+      url('./assets/fonts/Fredokadingbats.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@font-face {
+  font-family: 'Fredoka';
+  src: url('./assets/fonts/FredokaOne-Regular.eot');
+  src: url('./assets/fonts/FredokaOne-Regular.eot?#iefix') format('embedded-opentype'),
+      url('./assets/fonts/FredokaOne-Regular.woff2') format('woff2'),
+      url('./assets/fonts/FredokaOne-Regular.woff') format('woff'),
+      url('./assets/fonts/FredokaOne-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+@font-face {
+  font-family: 'Fredoka dingbats';
+  src: url('./assets/fonts/Fredokadingbats_1.eot');
+  src: url('./assets/fonts/Fredokadingbats_1.eot?#iefix') format('embedded-opentype'),
+      url('./assets/fonts/Fredokadingbats_1.woff2') format('woff2'),
+      url('./assets/fonts/Fredokadingbats_1.woff') format('woff'),
+      url('./assets/fonts/Fredokadingbats_1.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+
+.bluecolor{
+  background: #11014A;
 }
 
-.App-link {
-  color: #61dafb;
+/* .recharts-wrapper.line-chart-map{ */
+  /* background:        , #00FF0A, #FFFFFF, #FAFF00, #FF3737,); */
+  /* background: linear-gradient(to right, #ffff, #FAFF00,#FAFF00,#FAFF00,#FAFF00,#FAFF00,#FAFF00,#FF3737,#FAFF00,#FF3737,#FF3737,#FF3737,#FF3737,#FF3737,#FF3737,#FF3737,#FF3737,#FF3737,#FF3737,#FF3737,#FF3737,#FF3737,#FF3737,#FF3737,#FAFF00);
+
+} */
+
+.gradientcolor{
+  background: linear-gradient(to right, #2AF5C0, #23D1D4, #1AA4EC, #1B80C9);
 }
+/* .gradientcolor2{
+  background: linear-gradient(to right, #00FF0A, #FFFFFF, #FAFF00);
+} */
+.graph-h{
+  height: 100vh;
+}
+.recharts-wrapper {
+  margin: auto;
+}
+/* .gradientcolor{
+  background: url(./assets/images/bggra.png);
+} */
 
 .PointerMain {
-  width: 94%;
-  border: 1px solid black;
+  width: 64%;
+  /* border: 1px solid black; */
   padding: 7px 10px;
   display: block;
   position: absolute;
   text-align: start;
-  top: 9.8rem;
+  top: 30.5rem;
+  left: 16.1rem;
 }
 
 .Pointer {
   display: inline-block;
-  background: palevioletred;
+  background: yellowgreen;
+  border: 0 solid;
+  border-radius: 20px;
   width: 4px;
   height: 40px;
   position: relative;
-  opacity: 60%;
+  opacity: 0.8;
 }
 
 .spotPrice {
   display: inline-block;
-  background: greenyellow;
+  background: black;
   height: 19px;
+  color: white;
+  font-weight: 500;
   position: relative;
-  opacity: 60%;
-  top: 21px;
-  border: 1px solid green;
+  top: -29px;
+  border: 1px solid black;
   border-radius: 12px;
   width: 65px;
   font-size: 12px;
   padding: 2px;
   text-align: center;
+  right: 34px;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+
+
+path.recharts-curve.recharts-line-curve {
+  position: relative;
+}
+g.recharts-layer.recharts-line {
+  position: relative;
+}
+/* .css-mcrq3q-MuiGrid-root,
+.css-ps0wbp-MuiGrid-root{
+  flex-wrap: inherit !important;
+} */
+
+
+@media (max-width:767px){
+  .graph-h {
+    height: auto;
+}
 }

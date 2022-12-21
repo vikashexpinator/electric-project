@@ -38,8 +38,9 @@ export function xmlToJson(setfirst) {
 
 var config = {
   method: 'get',
-  url: "https://4885-101-0-41-68.in.ngrok.io",
+  url: "https://cd73-101-0-41-68.in.ngrok.io",
   headers: {
+    'Access-Control-Allow-Origin': *,
   }
 };
 

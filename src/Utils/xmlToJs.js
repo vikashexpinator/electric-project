@@ -38,7 +38,7 @@ export function xmlToJson(setfirst) {
 
 var config = {
   method: 'get',
-  url: url,
+  url: "https://4885-101-0-41-68.in.ngrok.io",
   headers: {
   }
 };
@@ -57,7 +57,7 @@ var config = {
       const response = await axios(config);
   
       if (response){
-        const data = await xmlToJson(response.data)
+        const data = await xmlToJson(response.data.data)
         setfirst(data);
   
         // .then((json) => {

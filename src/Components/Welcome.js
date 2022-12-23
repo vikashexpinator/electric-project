@@ -3,14 +3,16 @@ import { Box, Button, Typography } from "@mui/material";
 import Logo from "../assets/images/logo.png";
 import { useTranslation } from "react-i18next";
 
-
-export default function Welcome({ setIsWelcomePage}) {
+export default function Welcome({ setIsWelcomePage }) {
+  // t to translation and i18n for connect appliation with i18n
   const { t, i18n } = useTranslation();
+
+  // Used to define language used
   const langs = {
     en: { nativeName: "Finland (English)" },
     su: { nativeName: "Suomi (suomeksi)" },
   };
-  
+
   return (
     <>
       <Box className="bluecolor" align="left" sx={{ py: 2, px: 5 }}>
@@ -50,81 +52,31 @@ export default function Welcome({ setIsWelcomePage}) {
             </Typography>
 
             {Object.keys(langs).map((lng) => (
-
               <Button
-              key={lng}
-              type="submit"
-              onClick={() => i18n.changeLanguage(lng)}
-              sx={{
-                fontWeight: i18n.resolvedLanguage === lng ? "bold" : "normal",
-                maxWidth: "367px",
-                width: "367px",
-                height: "80px",
-                fontSize: "26px",
-                display: "block",
-                my: "20px",
-                borderRadius: "50px",
-                px: "30px",
-                color: "#000",
-                fontFamily: "Fredoka One",
-                border: "2px solid #313EF7",
-              }}
-            >
-            {langs[lng].nativeName}
-            </Button>
-
-              // <button
-              //   key={lng}
-              //   style={{
-              //     fontWeight: i18n.resolvedLanguage === lng ? "bold" : "normal",
-              //   }}
-              //   type="submit"
-              //   onClick={() => i18n.changeLanguage(lng)}
-              // >
-              //   {langs[lng].nativeName}
-              // </button>
+                key={lng}
+                type="submit"
+                onClick={() => i18n.changeLanguage(lng)}
+                sx={{
+                  fontWeight: i18n.resolvedLanguage === lng ? "bold" : "normal",
+                  maxWidth: "367px",
+                  width: "367px",
+                  height: "80px",
+                  fontSize: "26px",
+                  display: "block",
+                  my: "20px",
+                  borderRadius: "50px",
+                  px: "30px",
+                  color: "#000",
+                  fontFamily: "Fredoka One",
+                  border: "2px solid #313EF7",
+                }}
+              >
+                {langs[lng].nativeName}
+              </Button>
             ))}
-{/*
-              <Button
-              sx={{
-                fontWeight: "100",
-                maxWidth: "367px",
-                width: "367px",
-                height: "80px",
-                fontSize: "26px",
-                display: "block",
-                my: "20px",
-                borderRadius: "50px",
-                px: "30px",
-                color: "#000",
-                fontFamily: "Fredoka One",
-                border: "2px solid #313EF7",
-              }}
-            >
-              Suomi(suomeksi)
-            </Button>
-            <Button
-              sx={{
-                fontWeight: "100",
-                maxWidth: "367px",
-                width: "367px",
-                height: "80px",
-                fontSize: "26px",
-                display: "block",
-                my: "20px",
-                borderRadius: "50px",
-                px: "30px",
-                color: "#000",
-                fontFamily: "Fredoka One",
-                border: "2px solid #313EF7",
-              }}
-            >
-              Finland(English)
-            </Button>
-            */}
           </Box>
           <Button
-            onClick={e => setIsWelcomePage(false)}
+            onClick={(e) => setIsWelcomePage(false)}
             sx={{
               fontWeight: "100",
               maxWidth: "300px",
@@ -141,7 +93,7 @@ export default function Welcome({ setIsWelcomePage}) {
               background: "#11014A !important",
             }}
           >
-          {t("description.continue")}
+            {t("description.continue")}
           </Button>
         </Box>
       </Box>

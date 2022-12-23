@@ -40,11 +40,10 @@
   background: #11014A;
 }
 
-/* .recharts-wrapper.line-chart-map{ */
-  /* background:        , #00FF0A, #FFFFFF, #FAFF00, #FF3737,); */
-  /* background: linear-gradient(to right, #ffff, #FAFF00,#FAFF00,#FAFF00,#FAFF00,#FAFF00,#FAFF00,#FF3737,#FAFF00,#FF3737,#FF3737,#FF3737,#FF3737,#FF3737,#FF3737,#FF3737,#FF3737,#FF3737,#FF3737,#FF3737,#FF3737,#FF3737,#FF3737,#FF3737,#FAFF00);
 
-} */
+h3.MuiTypography-root.MuiTypography-h3.css-dpsdi6-MuiTypography-root {
+  margin-right: 20px;
+}
 
 .gradientcolor{
   background: linear-gradient(to right, #2AF5C0, #23D1D4, #1AA4EC, #1B80C9);
@@ -62,9 +61,12 @@
   background: url(./assets/images/bggra.png);
 } */
 
+.logo-e {
+  max-width: 250px;
+}
 .PointerMain {
   width: 64%;
-  /* border: 1px solid black; */
+   /* border: 1px solid black;  */
   padding: 7px 10px;
   display: block;
   position: absolute;
@@ -101,6 +103,12 @@
   right: 34px;
 }
 
+.applyFlex {
+  display: flex;
+  padding: 8px;
+  margin: 8px 21px;
+}
+
 
 
 path.recharts-curve.recharts-line-curve {
@@ -115,8 +123,28 @@ g.recharts-layer.recharts-line {
 } */
 
 
-@media (max-width:767px){
+@media screen and (max-width:767px){
   .graph-h {
     height: auto;
+}
+
+}
+@media screen and (max-width:575px){
+  .top-bar {
+    justify-content: center !important;
+    gap: 20px;
+  }
+  .css-1o52q67 {
+    width: 250px !important;
+}
+.css-1o52q67 p {
+  font-size: 20px;
+}
+.MuiBox-root.css-xi606m p {
+  font-size: 20px;
+}
+h3.MuiTypography-root.MuiTypography-h3.css-dpsdi6-MuiTypography-root {
+  font-size: 40px;
+  margin-right: 20px;
 }
 }

@@ -1,12 +1,11 @@
+// --- Import Packages
 import React, { useState, useEffect } from "react";
-
-// Import Packages...
 // import axios from "axios";
 
-// Import Assets
+// --- Import Assets
 import Logob from "../assets/images/Logo-b.png";
 
-// Import Components..
+// --- Import Components..
 import { Box, Button, Typography, Container, Grid, Link } from "@mui/material";
 import {
   LineChart,
@@ -19,9 +18,10 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-// Import Function
+// --- Import Function
 import { xmlToJson } from "../Utils/xmlToJs";
-// import {apiRequrestForElectricPrice} from '../Utils/apiRequest'
+import {applianceDataApi} from "../Utils/applianceApi"
+// --- import {apiRequrestForElectricPrice} from '../Utils/apiRequest'
 import {
   euroPerMwhToEuroCentsPerKwh,
   GetCurrentTime,
@@ -30,51 +30,6 @@ import {
   getPointerPositionHeight,
   applianceElectricCost,
 } from "../Utils/commonFunction";
-
-// const graphData = [
-//   {
-//     name: "Page 1",
-//     uv: 4000,
-//     pv: 2400,
-//     amt: 2400,
-//   },
-//   {
-//     name: "Page 2",
-//     uv: 3000,
-//     pv: 1398,
-//     amt: 2210,
-//   },
-//   {
-//     name: "Page C",
-//     uv: 2000,
-//     pv: 9800,
-//     amt: 2290,
-//   },
-//   {
-//     name: "Page D",
-//     uv: 2780,
-//     pv: 3908,
-//     amt: 2000,
-//   },
-//   {
-//     name: "Page E",
-//     uv: 1890,
-//     pv: 4800,
-//     amt: 2181,
-//   },
-//   {
-//     name: "Page F",
-//     uv: 2390,
-//     pv: 3800,
-//     amt: 2500,
-//   },
-//   {
-//     name: "Page G",
-//     uv: 3490,
-//     pv: 4300,
-//     amt: 2100,
-//   },
-// ];
 
 const applianceData = {
   currentVAT: 10, // in percent
@@ -100,19 +55,24 @@ export default function Graph({ t }) {
   const [appCon, setAppCon] = useState(applianceData.consumption);
   const [vat, setVat] = useState(applianceData.currentVAT);
   const [gradientColor, setGradientColor] = useState("");
+  const [applianceDatafromApi, setapplianceDatafromApi ] = useState({});
 
   // applianceElectricCost(appCon, vat, spotPrice)
   // converted data and set into "first" state
   useEffect(() => {
     xmlToJson(setfirst);
+    applianceDataApi(setapplianceDatafromApi);
   }, []);
 
-  // get price array
+  // useEffect(() => {
+  //   applianceDatafromApi && console.warn(typeof applianceDatafromApi.deviceName1)
+  // }, [applianceDatafromApi]);
+
+  // --- get price array
   let getPriceArray =
     first && first.Publication_MarketDocument.TimeSeries[0].Period[0].Point;
 
   // const data = getPriceArray.map(el => el["price.amount"]).flat()
-
   //   let stringdata = data.map(el => {
   //     if (euroPerMwhToEuroCentsPerKwh(el) < 10 ){
   //         // console.log("i am one")
@@ -137,17 +97,17 @@ export default function Graph({ t }) {
   //       ? newArray.map((el) => <p>{euroPerMwhToEuroCentsPerKwh(el[1])}</p>)
   //       : null;
 
-  // get today date from first
+  // --- get today date from first
   let todayData =
     first &&
     first.Publication_MarketDocument["period.timeInterval"][0].end[0]?.split(
       "T"
     )[0];
 
-  // get hh of of hh:mm
+  // --- get hh of of hh:mm
   const presentTime = GetCurrentTime().split(":")[0];
 
-  // To get the present electricity price.
+  // --- To get the present electricity price.
   function presentElectricityPrice() {
     if (getPriceArray !== undefined) {
       const spotElecticPrice =
@@ -156,7 +116,7 @@ export default function Graph({ t }) {
     }
   }
 
-  // Get WeekDayName According to date
+  // --- Get WeekDayName According to date
   function getWeekdayName(date) {
     const weekdays = [
       t("description.Sunday"),
@@ -279,7 +239,6 @@ export default function Graph({ t }) {
     if (priceDataForGraph !== undefined && maxPrice > 0) {
       let currentPrice = euroPerMwhToEuroCentsPerKwh(presentElectricityPrice());
       setSpotPrice(currentPrice);
-
       let final = `${parseFloat(
         getPointerPositionHeight(currentPrice, maxPrice)
       ).toFixed(2)}rem`;
@@ -287,12 +246,13 @@ export default function Graph({ t }) {
     }
   }, [maxPrice]);
 
-  console.log("price", getPriceArray?.map((el) => el["price.amount"]).flat());
-  // debugger
+  // console.log("price", getPriceArray?.map((el) => el["price.amount"]).flat());
+
   return (
     <div className="gradientcolor2 graph-h">
       <Container maxWidth="full">
         <Grid
+        className="top-bar"
           display="flex"
           justifyContent="space-between"
           container
@@ -300,10 +260,10 @@ export default function Graph({ t }) {
         >
           <Box>
             <Link href="#">
-              <img src={Logob} alt="" />
+              <img className="logo-e" src={Logob} alt="" />
             </Link>
           </Box>
-          <Box>
+          <Box className="load-box">
             <Box
               sx={{
                 border: "1px solid #0000001f",
@@ -332,7 +292,7 @@ export default function Graph({ t }) {
                 </Box>
                 <Box xs={6} textAlign="center">
                   <Typography
-                    variant="h3"
+                    variant="h4"
                     sx={{
                       color: "#11014A",
                       fontSize: "22px",
@@ -343,7 +303,7 @@ export default function Graph({ t }) {
                     {getWeekdayName(new Date())}
                   </Typography>
                   <Typography
-                    variant="h3"
+                    variant="h5"
                     sx={{
                       color: "#11014A",
                       fontSize: "22px",
@@ -448,8 +408,7 @@ export default function Graph({ t }) {
                   fontFamily: "Fredoka",
                 }}
               >
-                Sauna{t("description.Sauna")}{" "}
-                {applianceElectricCost(appCon.sauna, vat, spotPrice)}
+              {applianceDatafromApi ? applianceDatafromApi.deviceName1 + " " + applianceElectricCost(applianceDatafromApi.Consumption1, applianceDatafromApi.vat, spotPrice) : t("description.Sauna") + " " + applianceElectricCost(appCon.sauna, vat, spotPrice)}
               </Typography>
               <Typography
                 sx={{
@@ -459,8 +418,8 @@ export default function Graph({ t }) {
                   fontFamily: "Fredoka",
                 }}
               >
-                {t("description.Owen")}{" "}
-                {applianceElectricCost(appCon.owen, vat, spotPrice)}{" "}
+              {applianceDatafromApi ? applianceDatafromApi.deviceName2 + " " + applianceElectricCost(applianceDatafromApi.Consumption2, applianceDatafromApi.vat, spotPrice) : t("description.Owen") + " " + applianceElectricCost(appCon.owen, vat, spotPrice)}
+
               </Typography>
               <Typography
                 sx={{
@@ -470,8 +429,7 @@ export default function Graph({ t }) {
                   fontFamily: "Fredoka",
                 }}
               >
-                {t("description.ElectricCar")}{" "}
-                {applianceElectricCost(appCon.electricCar, vat, spotPrice)}{" "}
+              {applianceDatafromApi ? applianceDatafromApi.deviceName3 + " " + applianceElectricCost(applianceDatafromApi.Consumption3, applianceDatafromApi.vat, spotPrice) : t("description.ElectricCar") + " " + applianceElectricCost(appCon.electricCar, vat, spotPrice)}
               </Typography>
               <Typography
                 sx={{
@@ -481,8 +439,7 @@ export default function Graph({ t }) {
                   fontFamily: "Fredoka",
                 }}
               >
-                {t("description.Dishwasher")}{" "}
-                {applianceElectricCost(appCon.diswasher, vat, spotPrice)}
+              {applianceDatafromApi ? applianceDatafromApi.deviceName4 + " " + applianceElectricCost(applianceDatafromApi.Consumption4, applianceDatafromApi.vat, spotPrice) : t("description.Dishwasher") + " " + applianceElectricCost(appCon.diswasher, vat, spotPrice)}
               </Typography>
             </Box>
           </Box>
@@ -504,8 +461,8 @@ export default function Graph({ t }) {
                   fontFamily: "Fredoka",
                 }}
               >
-                {t("description.Washingmachine")}{" "}
-                {applianceElectricCost(appCon.washingMachine, vat, spotPrice)}
+              {applianceDatafromApi ? applianceDatafromApi.deviceName5 + " " + applianceElectricCost(applianceDatafromApi.Consumption5, applianceDatafromApi.vat, spotPrice) : t("description.Washingmachine") + " " + applianceElectricCost(appCon.washingMachine, vat, spotPrice)}
+
               </Typography>
               <Typography
                 sx={{
@@ -515,8 +472,7 @@ export default function Graph({ t }) {
                   fontFamily: "Fredoka",
                 }}
               >
-                {t("description.LaundryDryer")}{" "}
-                {applianceElectricCost(appCon.laundryDryer, vat, spotPrice)}{" "}
+              {applianceDatafromApi ? applianceDatafromApi.deviceName6 + " " + applianceElectricCost(applianceDatafromApi.Consumption6, applianceDatafromApi.vat, spotPrice) : t("description.LaundryDryer") + " " + applianceElectricCost(appCon.laundryDryer, vat, spotPrice)}
               </Typography>
               <Typography
                 sx={{
@@ -526,8 +482,7 @@ export default function Graph({ t }) {
                   fontFamily: "Fredoka",
                 }}
               >
-                {t("description.GamingPC")}{" "}
-                {applianceElectricCost(appCon.gamingPc, vat, spotPrice)}{" "}
+              {applianceDatafromApi ? applianceDatafromApi.deviceName7 + " " + applianceElectricCost(applianceDatafromApi.Consumption7, applianceDatafromApi.vat, spotPrice) : t("description.GamingPC") + " " + applianceElectricCost(appCon.gamingPc, vat, spotPrice)}
               </Typography>
               <Typography
                 sx={{
@@ -537,8 +492,7 @@ export default function Graph({ t }) {
                   fontFamily: "Fredoka",
                 }}
               >
-                {t("description.Coffeemaker")}{" "}
-                {applianceElectricCost(appCon.coffeeMaker, vat, spotPrice)}
+              {applianceDatafromApi ? applianceDatafromApi.deviceName8 + " " + applianceElectricCost(applianceDatafromApi.Consumption8, applianceDatafromApi.vat, spotPrice) : t("description.Coffeemaker") + " " + applianceElectricCost(appCon.coffeeMaker, vat, spotPrice)}
               </Typography>
             </Box>
           </Box>
@@ -574,3 +528,49 @@ export default function Graph({ t }) {
     </div>
   );
 }
+
+
+// const graphData = [
+//   {
+//     name: "Page 1",
+//     uv: 4000,
+//     pv: 2400,
+//     amt: 2400,
+//   },
+//   {
+//     name: "Page 2",
+//     uv: 3000,
+//     pv: 1398,
+//     amt: 2210,
+//   },
+//   {
+//     name: "Page C",
+//     uv: 2000,
+//     pv: 9800,
+//     amt: 2290,
+//   },
+//   {
+//     name: "Page D",
+//     uv: 2780,
+//     pv: 3908,
+//     amt: 2000,
+//   },
+//   {
+//     name: "Page E",
+//     uv: 1890,
+//     pv: 4800,
+//     amt: 2181,
+//   },
+//   {
+//     name: "Page F",
+//     uv: 2390,
+//     pv: 3800,
+//     amt: 2500,
+//   },
+//   {
+//     name: "Page G",
+//     uv: 3490,
+//     pv: 4300,
+//     amt: 2100,
+//   },
+// ];

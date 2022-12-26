@@ -7,7 +7,7 @@ export function xmlToJson(setfirst) {
   // Set format to used in axios request.
   var config = {
     method: "get",
-    url: "https://electricbackendserver.onrender.com/",
+    url: "http://localhost:3005/",
     headers: {},
   };
 

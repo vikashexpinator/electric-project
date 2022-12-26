@@ -52,7 +52,7 @@ h3.MuiTypography-root.MuiTypography-h3.css-dpsdi6-MuiTypography-root {
   background: linear-gradient(to right, #00FF0A, #FFFFFF, #FAFF00);
 } */
 .graph-h{
-  height: 100vh;
+  height: 100%;
 }
 .recharts-wrapper {
   margin: auto;
@@ -122,7 +122,12 @@ g.recharts-layer.recharts-line {
   flex-wrap: inherit !important;
 } */
 
-
+g.recharts-layer.recharts-cartesian-axis.recharts-yAxis.yAxis {
+  display: none !important;
+}
+g.recharts-cartesian-grid {
+  display: none !important;
+}
 @media screen and (max-width:767px){
   .graph-h {
     height: auto;
@@ -147,4 +152,11 @@ h3.MuiTypography-root.MuiTypography-h3.css-dpsdi6-MuiTypography-root {
   font-size: 40px;
   margin-right: 20px;
 }
+}
+
+.recharts-responsive-container {
+  width: 115%;
+  height: 400px;
+  position: relative;
+  left: -102px;
 }

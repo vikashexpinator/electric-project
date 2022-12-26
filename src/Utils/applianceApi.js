@@ -5,7 +5,7 @@ export function applianceDataApi(setapplianceDatafromApi) {
     // Set format to used in axios request.
     let config = {
       method: "get",
-      url: "https://electricbackendserver.onrender.com/get-device/63a43ec75089956c91b7b4a7",
+      url: "http://localhost:3005/get-device/63a43ec75089956c91b7b4a7",
       headers: {},
     };
   
@@ -45,7 +45,7 @@ export function applianceDataApi(setapplianceDatafromApi) {
     const loadApplianceData = async () => {
       try {
         // Get responce from backend server.
-        const response = await axios.put("https://electricbackendserver.onrender.com/update-electric/63a43ec75089956c91b7b4a7", data1);
+        const response = await axios.put("http://localhost:3005/update-electric/63a43ec75089956c91b7b4a7", data1);
   
         // Change recived xml to json
         if (response) {

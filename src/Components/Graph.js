@@ -179,7 +179,7 @@ export default function Graph({ t }) {
         let Obj = {
           name: el.position[0],
           electricPrice: euroPerMwhToEuroCentsPerKwh(el["price.amount"][0]),
-          height: 32,
+          height: 55,
         };
         if (Obj.electricPrice > max) {
           max = Obj.electricPrice;
@@ -249,7 +249,12 @@ export default function Graph({ t }) {
   // console.log("price", getPriceArray?.map((el) => el["price.amount"]).flat());
 
   return (
-    <div className="gradientcolor2 graph-h">
+    <div className="gradientcolor2 graph-h"
+    style={{
+      background:
+        `linear-gradient(to right, ${gradientColor})`,
+    }} 
+    >
       <Container maxWidth="full">
         <Grid
         className="top-bar"
@@ -346,15 +351,15 @@ export default function Graph({ t }) {
             </Box>
           </Box>
         </Grid>
-        <ResponsiveContainer width="95%" height={400}>
+        <ResponsiveContainer width="110%" height={400} padding="0px" margin="0px">
           <LineChart
             width={1000}
             height={400}
             //className="line-chart-map"
-            style={{
-              background:
-                `linear-gradient(to right, #ffff, ${gradientColor})`,
-            }}
+            // style={{
+            //   background:
+            //     `linear-gradient(to right, #ffff, ${gradientColor})`,
+            // }}
             data={priceDataForGraph}
             margin={{
               top: 5,

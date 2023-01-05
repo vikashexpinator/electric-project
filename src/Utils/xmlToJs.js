@@ -7,7 +7,7 @@ export function xmlToJson(setfirst) {
   // Set format to used in axios request.
   var config = {
     method: "get",
-    url: "http://sahkoapuri.fly.dev/",
+    url: "https://sahkoapuri.fly.dev/",
     headers: {},
   };
   // http://13.53.179.35:1234/

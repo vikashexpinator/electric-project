@@ -5,7 +5,7 @@ export function applianceDataApi(setapplianceDatafromApi,setIsUpdated) {
     // Set format to used in axios request.
     let config = {
       method: "get",
-      url: "http://sahkoapuri.fly.dev/get-device/63a43ec75089956c91b7b4a7",
+      url: "https://sahkoapuri.fly.dev/get-device/63a43ec75089956c91b7b4a7",
       headers: {},
     };
     

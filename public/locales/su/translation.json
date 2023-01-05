@@ -20,6 +20,6 @@
     "Coffeemaker": "Kahvinkeitin",
     "SpotNow": "HINTA NYT",
     "FinlandSpotPriceNow": "SPOT-HINTA NYT",
-    "BottomMsg": "Sähköapurin on kehittänyt OOMF Agency Helsingissä. Hinnat ovat sähköpörssin SPOT-hintoja eikä niihin sisälly oman sopimuksesi marginaali. Kulutukset ovat arvioita. Palaute ja yhteydenotot: hello@sahkoapuri.fi "
+    "BottomMsg": "Sähköapurin on kehittänyt <a href='https://oomf.fi'>OOMF Agency</a> Helsingissä. Hinnat ovat sähköpörssin SPOT-hintoja eikä niihin sisälly oman sopimuksesi marginaali. Kulutukset ovat arvioita. Palaute ja yhteydenotot: hello@sahkoapuri.fi "
   }
 }

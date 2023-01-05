@@ -1,14 +1,14 @@
 import axios from "axios";
 
-export function applianceDataApi(setapplianceDatafromApi) {
+export function applianceDataApi(setapplianceDatafromApi,setIsUpdated) {
     
     // Set format to used in axios request.
     let config = {
       method: "get",
-      url: "https://electricbackendserver.onrender.com/get-device/63a43ec75089956c91b7b4a7",
+      url: "http://sahkoapuri.fly.dev/get-device/63a43ec75089956c91b7b4a7",
       headers: {},
     };
-  
+    
     const loadApplianceData = async () => {
       try {
         // Get responce from backend server.
@@ -16,50 +16,44 @@ export function applianceDataApi(setapplianceDatafromApi) {
   
         // Change recived xml to json
         if (response) {
-            // console.log(response.data.data[0].deviceDetails)
+          
              
           const data = await response.data.data[0].deviceDetails;
 
-          (data !== undefined) && setapplianceDatafromApi(data);
+          (data !== undefined) && setapplianceDatafromApi(data)
         }
       } catch (error) {
-        console.warn(error.message);
+        console.log(error.message);
       }
     };
     // Execute loadPost function
     loadApplianceData();
   
   }
-
   
-  export function updateapplianceDataApi(setapplianceDatafromApi, data1, setIsUpdated) {
+  export function updateapplianceDataApi(setapplianceDatafromApi, data1, queryParamsString ,setIsFirstRender) {
     
-    // Set format to used in axios request.
-    // let config = {
-    //   method: "put",
-    //   url: "http://localhost:3005/update-electric/63a43ec75089956c91b7b4a7",
-    //   headers: {},
-    //   body: data1,
-    // };
+   
   
-    const loadApplianceData = async () => {
+    const loadApplianceData = async (setIsUpdated) => {
+      setIsFirstRender(true)
+
       try {
         // Get responce from backend server.
-        const response = await axios.put("https://electricbackendserver.onrender.com//update-electric/63a43ec75089956c91b7b4a7", data1);
-  
-        // Change recived xml to json
-        if (response) {
-            // console.log(response.data.data[0].deviceDetails)
-             
-          const data = await response.data.data[0].deviceDetails;
-          data && setIsUpdated(true)
-        //   (data !== undefined) && setapplianceDatafromApi(data);
+        const response = await axios.put(`https://sahkoapuri.fly.dev/update-electric/63a43ec75089956c91b7b4a7${queryParamsString}`, data1);
+
+        if (response.status !== "200") {
+          console.log(response.status)
+          return true          
+        }else {
+          setIsFirstRender(true)    
+          return false
         }
+
       } catch (error) {
-        console.warn(error.message);
+        console.log(error.message);
       }
     };
     // Execute loadPost function
-    loadApplianceData();
-  
+    return loadApplianceData();
   }

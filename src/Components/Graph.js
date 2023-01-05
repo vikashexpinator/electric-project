@@ -4,9 +4,10 @@ import React, { useState, useEffect } from "react";
 
 // --- Import Assets
 import Logob from "../assets/images/Logo-b.png";
+import CustomTooltip from "./TooltipComponent";
 
 // --- Import Components..
-import { Box, Button, Typography, Container, Grid, Link } from "@mui/material";
+import { Box, Typography, Container, Grid, Link } from "@mui/material";
 import {
   LineChart,
   Line,
@@ -23,10 +24,10 @@ import { xmlToJson } from "../Utils/xmlToJs";
 import {applianceDataApi} from "../Utils/applianceApi"
 // --- import {apiRequrestForElectricPrice} from '../Utils/apiRequest'
 import {
-  euroPerMwhToEuroCentsPerKwh,
+  
   GetCurrentTime,
   ChangeDateFormat,
-  getPointerPosition,
+
   getPointerPositionHeight,
   applianceElectricCost,
 } from "../Utils/commonFunction";
@@ -56,46 +57,34 @@ export default function Graph({ t }) {
   const [vat, setVat] = useState(applianceData.currentVAT);
   const [gradientColor, setGradientColor] = useState("");
   const [applianceDatafromApi, setapplianceDatafromApi ] = useState({});
+  // const [windowHeight, setWindowHeight ] = useState(""); 
+  // const [windowWidth, setWindowWidth ] = useState(""); 
 
-  // applianceElectricCost(appCon, vat, spotPrice)
+
   // converted data and set into "first" state
   useEffect(() => {
     xmlToJson(setfirst);
     applianceDataApi(setapplianceDatafromApi);
+    // var w = window.innerWidth;
+    // var h = window.innerHeight;
+    // setWindowHeight(h)
+    // setWindowWidth(w)
   }, []);
 
-  // useEffect(() => {
-  //   applianceDatafromApi && console.warn(typeof applianceDatafromApi.deviceName1)
-  // }, [applianceDatafromApi]);
+  // function selectCurrentElement (){
+  //   let getTime = new Date();
+  //   document.getElementsByClassName("recharts-cartesian-axis-ticks")[0].getElementsByTagName("text")[`${getTime.getHours() - 1}`].classList.add("highliteText")
+  // }
+  
+  // setTimeout(() => {
+  //   selectCurrentElement()  
+  // }, 2000);
+  
 
   // --- get price array
   let getPriceArray =
     first && first.Publication_MarketDocument.TimeSeries[0].Period[0].Point;
 
-  // const data = getPriceArray.map(el => el["price.amount"]).flat()
-  //   let stringdata = data.map(el => {
-  //     if (euroPerMwhToEuroCentsPerKwh(el) < 10 ){
-  //         // console.log("i am one")
-  //         return "#00FF0A"
-  //     }else if (euroPerMwhToEuroCentsPerKwh(el) > 10 && euroPerMwhToEuroCentsPerKwh(el) < 20    ){
-  //         // console.log("i am two")
-  //         return "#FAFF00"
-  //     }else if (euroPerMwhToEuroCentsPerKwh(el) >= 20){
-  //         // console.log("i am three")
-  //         return "#FF3737"
-  //     }
-  // })
-
-  //   let newArray =
-  //     getPriceArray !== undefined &&
-  //     getPriceArray.map((el) => {
-  //       return [el.position, el["price.amount"]];
-  //     });
-
-  //   const newArr =
-  //     newArray.length > 0
-  //       ? newArray.map((el) => <p>{euroPerMwhToEuroCentsPerKwh(el[1])}</p>)
-  //       : null;
 
   // --- get today date from first
   let todayData =
@@ -132,54 +121,47 @@ export default function Graph({ t }) {
 
   // Get Different Device Consumtion data
 
-  // Get Today Max Electric Price
-  // function TodayMaxElectricPrice() {
-  //   if (getPriceArray !== undefined) {
-  //     const spotElecticPrice =
-  //       getPriceArray[presentTime - 1]["price.amount"].toString();
-  //     return spotElecticPrice;
-  //   }
-  // }
 
-  // useEffect(() => {
-  //   const loadPost = async () => {
-  //     const response = await axios.get(
-  //       "https://web-api.tp.entsoe.eu/api?securityToken=dc731ef0-4582-408b-9cad-c9dbebbe306f&documentType=A44&in_Domain=10YFI-1--------U&out_Domain=10YFI-1--------U&periodStart=202212142300&periodEnd=202212152300"
-  //     );
-  //     response
-  //       ? console.warn(response.data)
-  //       : console.warn("no we don't have data");
-  //   };
-  //   // Call the function
-  //   loadPost();
-  // }, []);
-
-  //   let dataArr = [];
-
-  //   for (let i = 0; i < 24; i++) {
-  //     let Obj = {
-  //       name: 0,
-  //       uv: 26,
-  //       // pv: 24,
-  //       amt: 24,
-  //     };
-  //     Obj.name = i;
-  //     dataArr[i] = Obj;
-  //   }
-
-  // el["price.amount"]
-  // el.position
+// function newHeight(){
+//   let newData = [...getPriceArray];
+//   let max = 55;
+//   newData.map(el => {
+//     if (euroPerMwhToEuroCentsPerKwh(el["price.amount"][0]) > max){
+//       max = euroPerMwhToEuroCentsPerKwh(el["price.amount"][0]) && euroPerMwhToEuroCentsPerKwh(el["price.amount"][0]);
+//     }
+//   })
+//   max = Number(max)
+//   return (max > 0) && max.toString() 
+// }
 
   useEffect(() => {
     if (getPriceArray !== undefined) {
       let newData = [...getPriceArray];
       let max = 0;
       let dataArr = [];
+      // function test (el){
+      //   // if (el.position[0] == 1 || 24){
+      //   //   return el.position[0]
+      //   // }
+      //   if (el.position[0].length === 1){
+      //     if (el.position[0] === 1){
+      //       return `0${el.position[0]}`
+      //     }
+      //     return `0${el.position[0]}:00`;
+      //   }else{
+      //     // if (el.position[0] == 24){
+      //     //   return el.position[0]
+      //     // }
+      //     return `${el.position[0]}:00`;
+      //   }
+      // }
+
       newData.map((el) => {
         let Obj = {
-          name: el.position[0],
+          name: el.position[0].length === 1 ? `0${el.position[0]}:00` : `${el.position[0]}:00`,
           electricPrice: euroPerMwhToEuroCentsPerKwh(el["price.amount"][0]),
-          height: 55,
+          // height: maxPrice ? maxPrice + 4 : maxPrice,
+          height: 50
         };
         if (Obj.electricPrice > max) {
           max = Obj.electricPrice;
@@ -195,23 +177,20 @@ export default function Graph({ t }) {
 
       let stringdata = data.map((el) => {
         if (euroPerMwhToEuroCentsPerKwh(el) < 10) {
-          // console.log("i am one")
+      
           return "#00FF0A";
         } else if (
           euroPerMwhToEuroCentsPerKwh(el) > 10 &&
           euroPerMwhToEuroCentsPerKwh(el) < 20
         ) {
-          // console.log("i am two")
+    
           return "#FAFF00";
         } else if (euroPerMwhToEuroCentsPerKwh(el) >= 20) {
-          // console.log("i am three")
+     
           return "#FF3737";
         }
       });
-      // for less then 10 #00FF0A,#FFFFFF
-      // 10-20 - #FFFFFF,#FAFF00
-      // more then 30 - #FAFF00,#FF3737
-      // console.log(stringdata.toString());
+  
       setGradientColor(stringdata.toString());
     }
 
@@ -221,19 +200,6 @@ export default function Graph({ t }) {
     const euroPerKwh = (euroPerMwh / 1000) * 100;
     return parseFloat(euroPerKwh).toFixed(2);
   }
-
-  //   let stringdata = data.map(el => {
-  //     if (euroPerMwhToEuroCentsPerKwh(el) < 10 ){
-  //         // console.log("i am one")
-  //         return "#00FF0A"
-  //     }else if (euroPerMwhToEuroCentsPerKwh(el) > 10 && euroPerMwhToEuroCentsPerKwh(el) < 20    ){
-  //         // console.log("i am two")
-  //         return "#FAFF00"
-  //     }else if (euroPerMwhToEuroCentsPerKwh(el) >= 20){
-  //         // console.log("i am three")
-  //         return "#FF3737"
-  //     }
-  // })
 
   useEffect(() => {
     if (priceDataForGraph !== undefined && maxPrice > 0) {
@@ -246,7 +212,9 @@ export default function Graph({ t }) {
     }
   }, [maxPrice]);
 
-  // console.log("price", getPriceArray?.map((el) => el["price.amount"]).flat());
+// function getHeightandWidth(){
+
+// }
 
   return (
     <div className="gradientcolor2 graph-h"
@@ -290,6 +258,7 @@ export default function Graph({ t }) {
                       fontSize: "60px",
                       fontWeight: "100",
                       fontFamily: "Fredoka",
+                      marginRight: "20px",
                     }}
                   >
                     {GetCurrentTime()}
@@ -345,33 +314,30 @@ export default function Graph({ t }) {
                   {` ${euroPerMwhToEuroCentsPerKwh(
                     presentElectricityPrice()
                   )} c/KWh`}
-                  {/*30,02 c/KWh */}
+             
                 </Typography>
               </Box>
             </Box>
           </Box>
         </Grid>
-        <ResponsiveContainer width="110%" height={400} padding="0px" margin="0px">
+        <ResponsiveContainer className='rs-container' height={400} padding="0px" margin="0px">
           <LineChart
+            // width={windowWidth}
+            // height={windowHeight}
             width={1000}
             height={400}
-            //className="line-chart-map"
-            // style={{
-            //   background:
-            //     `linear-gradient(to right, #ffff, ${gradientColor})`,
-            // }}
             data={priceDataForGraph}
             margin={{
               top: 5,
-              right: 30,
-              left: 20,
+              right: 0,
+              left: 0,
               bottom: 5,
             }}
           >
-            <CartesianGrid strokeDasharray="1 1" />
+            <CartesianGrid strokeDasharray="11" />
             <XAxis dataKey="name" />
             <YAxis dataKey="height" />
-            <Tooltip />
+            <Tooltip  content={CustomTooltip} />
             <Legend />
             <Line
               type="monotone"
@@ -492,7 +458,7 @@ export default function Graph({ t }) {
               <Typography
                 sx={{
                   color: "#111010",
-                  fontSize: "25px",
+                  fontSize: "24px",
                   fontWeight: "100",
                   fontFamily: "Fredoka",
                 }}
@@ -502,80 +468,21 @@ export default function Graph({ t }) {
             </Box>
           </Box>
         </Grid>
-        <Box textAlign="center">
+        <Box textAlign="center" className="footer">
           <Typography
+          className="bottomtextCss"
             sx={{
               color: "#111010",
-              fontSize: "24px",
+              fontSize: "16px",
               fontWeight: "100",
               fontFamily: "Fredoka",
             }}
           >
-            {t("description.BottomMsg")}
+          Sähköapurin on kehittänyt <a href='https://oomf.fi'>OOMF Agency</a> Helsingissä. Hinnat ovat sähköpörssin Arvonlisäverollisia SPOT-hintoja eikä niihin sisälly oman sopimuksesi marginaali. Kulutukset ovat arvioita. Palaute ja yhteydenotot: <a href="hello@oomf.fi">hello@oomf.fi</a>
           </Typography>
         </Box>
       </Container>
-
-      {/*     
-      <div className="PointerMain" 
-      // style={{ top: `${pointerheight}` }}
-      >
-        <div
-          className="Pointer"
-          // style={{ left: getPointerPosition(presentTime) }}
-        >
-          <div className="spotPrice" style={{ opacity: "0.7" }}>
-            Spot Price
-          </div>
-        </div>
-      </div>
-    */}
     </div>
   );
 }
 
-
-// const graphData = [
-//   {
-//     name: "Page 1",
-//     uv: 4000,
-//     pv: 2400,
-//     amt: 2400,
-//   },
-//   {
-//     name: "Page 2",
-//     uv: 3000,
-//     pv: 1398,
-//     amt: 2210,
-//   },
-//   {
-//     name: "Page C",
-//     uv: 2000,
-//     pv: 9800,
-//     amt: 2290,
-//   },
-//   {
-//     name: "Page D",
-//     uv: 2780,
-//     pv: 3908,
-//     amt: 2000,
-//   },
-//   {
-//     name: "Page E",
-//     uv: 1890,
-//     pv: 4800,
-//     amt: 2181,
-//   },
-//   {
-//     name: "Page F",
-//     uv: 2390,
-//     pv: 3800,
-//     amt: 2500,
-//   },
-//   {
-//     name: "Page G",
-//     uv: 3490,
-//     pv: 4300,
-//     amt: 2100,
-//   },
-// ];
